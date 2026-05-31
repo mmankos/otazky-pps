@@ -111,10 +111,10 @@ Určte efektívne zrýchlenie v prípade spracovania tohto prúdu inštrukcií v
 **Dôležitá poznámka:** V jednoduchej skalárnej in-order pipeline riešime **iba RAW hazardy** (Read After Write). WAR (Write After Read) a WAW (Write After Write) v tomto režime nastať nemôžu, pretože inštrukcie sa spracúvajú v poradí — OF (4. stupeň) je vždy pred S (6. stupeň) tej istej inštrukcie a S predchádzajúcej inštrukcie je vždy pred S nasledujúcej. Stall je potrebný, keď OF závislej inštrukcie nastane v rovnakom alebo skoršom cykle ako S produkčnej inštrukcie (výsledok je v registri dostupný až po S, nie po E).
 
 **Sekvenčný čas** — každá inštrukcia trvá `k` cyklov, vykonávajú sa za sebou:
-$$ T_s = n \times k = 5 \times 6 = 30\ \text{cyklov} $$
+$$T_s = n \times k = 5 \times 6 = 30\ \text{cyklov}$$
 
 **Prúdový čas (ideálny, bez hazardov)** — prvá inštrukcia trvá `k` cyklov, každá ďalšia sa dokončí o 1 cyklus neskôr:
-$$ T_{\text{p(ideál)}} = k + (n - 1) = 6 + 4 = 10\ \text{cyklov} $$
+$$T_{\text{p(ideál)}} = k + (n - 1) = 6 + 4 = 10\ \text{cyklov}$$
 
 **RAW hazardy v postupnosti:**
 - I1: `add a, b, c` → cieľ `a` (zapisuje v S – 6. stupeň)
@@ -134,10 +134,10 @@ I5:                      F   F   D   OA  OF  E   S
 (st = stall — I3 čaká v OA, I4 a I5 sú blokované, lebo predchádzajúci stupeň je obsadený)
 
 **Prúdový čas (reálny):**
-$$ T_p = k + (n - 1) + \text{stalls} = 6 + 4 + 1 = 11\ \text{cyklov} $$
+$$T_p = k + (n - 1) + \text{stalls} = 6 + 4 + 1 = 11\ \text{cyklov}$$
 
 **Efektívne zrýchlenie:**
-$$ \text{Speedup} = \frac{T_s}{T_p} = \frac{30}{11} \approx 2{,}73 $$
+$$\text{Speedup} = \frac{T_s}{T_p} = \frac{30}{11} \approx 2{,}73$$
 
 ---
 
@@ -158,10 +158,10 @@ Aká je obsadenosť výpočtových zdrojov (angl. occupancy) v percentách? Znak
 - `max_blokov` = maximálny počet blokov na SM = 6
 
 **Skutočný počet vlákien na SM:**
-$$ \text{skutočné\_vlákna} = \text{veľkosť\_bloku} \times \text{max\_blokov} = 256 \times 6 = 1536 $$
+$$\text{skutočné\_vlákna} = \text{veľkosť\_bloku} \times \text{max\_blokov} = 256 \times 6 = 1536$$
 
 **Obsadenosť (occupancy):**
-$$ \text{occupancy} = \frac{\text{skutočné\_vlákna}}{\text{max\_vlákien}} \times 100\ \% = \frac{1536}{2048} \times 100\ \% = 75\ \% $$
+$$\text{occupancy} = \frac{\text{skutočné\_vlákna}}{\text{max\_vlákien}} \times 100\ \% = \frac{1536}{2048} \times 100\ \% = 75\ \%$$
 
 Obmedzujúcim faktorom je počet blokov — pri 256 vláknach na blok by naplnenie kapacity 2048 vlákien vyžadovalo 8 blokov, ale SM zvládne len 6.
 
@@ -190,23 +190,21 @@ Určte hodnotu neúspešného hľadania (miss rate) v plne asociatívnej pamäti
 
 - `sizeof(int)` = 32 bitov
 - Veľkosť bloku cache = 128 bitov
-$$ \text{počet intov v bloku} = \frac{128}{32} = 4 $$
+$$\text{počet intov v bloku} = \frac{128}{32} = 4$$
 
 Pri sekvenčnom prístupe:
 - Prvý prístup ku každému bloku je **miss** (compulsory miss) — načíta sa celý 128b blok do cache
 - Ďalšie 3 prístupy k prvkom v tom istom bloku sú **hit**
 
-$$ \text{počet prístupov} = M \times N $$
+$$\text{počet prístupov} = M \times N$$
 
-$$ \text{počet missov} = \frac{\text{počet prvkov}}{\text{prvkov na blok}} = \frac{M \times N}{4} $$
+$$\text{počet missov} = \frac{\text{počet prvkov}}{\text{prvkov na blok}} = \frac{M \times N}{4}$$
 
 (jeden miss na každý blok — do jedného bloku sa zmestia 4 inty)
 
 Hodnoty M a N nie sú zadané, ale nie sú potrebné — vo vzorci sa vykrátia:
 
-$$
-\text{miss rate} = \frac{\text{počet missov}}{\text{počet prístupov}} = \frac{\frac{M \times N}{4}}{M \times N} = \frac{1}{4} = 0{,}25 = 25\%
-$$
+$$\text{miss rate} = \frac{\text{počet missov}}{\text{počet prístupov}} = \frac{\frac{M \times N}{4}}{M \times N} = \frac{1}{4} = 0{,}25 = 25\%$$
 
 Miss rate závisí výhradne od pomeru veľkosti bloku cache a veľkosti prvku poľa, nie od rozmerov poľa.
 
@@ -225,7 +223,7 @@ Pri akej hodnote úspešného hľadania v cache (angl. hit rate; h) získame tri
 **Postup výpočtu:**
 
 Vzorec pre priemernú prístupovú dobu (AMAT):
-$$ \text{AMAT} = \text{hit time} + \text{miss rate} \times \text{miss penalty} $$
+$$\text{AMAT} = \text{hit time} + \text{miss rate} \times \text{miss penalty}$$
 
 kde:
 - `hit time` = prístupová doba cache = 1 cyklus
@@ -233,17 +231,17 @@ kde:
 - `miss rate` = 1 - h
 
 **1. AMAT pri h = 99% (0,99):**
-$$ \text{miss rate} = 1 - 0{,}99 = 0{,}01 $$
-$$ \text{AMAT}_{99\%} = 1 + 0{,}01 \times 100 = 1 + 1 = 2\ \text{cykly} $$
+$$\text{miss rate} = 1 - 0{,}99 = 0{,}01$$
+$$\text{AMAT}_{99\%} = 1 + 0{,}01 \times 100 = 1 + 1 = 2\ \text{cykly}$$
 
 **2. Hľadáme h také, aby AMAT = 3 × AMAT pri 99%:**
-$$ \text{AMAT}_h = 3 \times 2 = 6\ \text{cyklov} $$
+$$\text{AMAT}_h = 3 \times 2 = 6\ \text{cyklov}$$
 
 **3. Dosadenie do vzorca:**
-$$ 1 + (1 - h) \times 100 = 6 $$
-$$ (1 - h) \times 100 = 5 $$
-$$ 1 - h = 0{,}05 $$
-$$ h = 0{,}95 = 95\% $$
+$$1 + (1 - h) \times 100 = 6$$
+$$(1 - h) \times 100 = 5$$
+$$1 - h = 0{,}05$$
+$$h = 0{,}95 = 95\%$$
 
 ---
 
@@ -347,16 +345,16 @@ Hodnotu efektívneho zrýchlenia zaokrúhlite na stotiny!
 **Postup výpočtu:**
 
 **Sekvenčný čas** — každá z 8 inštrukcií trvá 6 cyklov:
-$$ T_s = n \times k = 8 \times 6 = 48\ \text{cyklov} $$
+$$T_s = n \times k = 8 \times 6 = 48\ \text{cyklov}$$
 
 **Prúdový čas (ideálny, bez hazardov)** — prvá inštrukcia trvá 6 cyklov, každá ďalšia o 1 cyklus neskôr:
-$$ T_{\text{p(ideál)}} = k + (n - 1) = 6 + 7 = 13\ \text{cyklov} $$
+$$T_{\text{p(ideál)}} = k + (n - 1) = 6 + 7 = 13\ \text{cyklov}$$
 
 **Prúdový čas (reálny)** — s dvomi RAW hazardmi (2 + 1 stall):
-$$ T_p = k + (n - 1) + \text{stalls} = 6 + 7 + 3 = 16\ \text{cyklov} $$
+$$T_p = k + (n - 1) + \text{stalls} = 6 + 7 + 3 = 16\ \text{cyklov}$$
 
 **Efektívne zrýchlenie:**
-$$ \text{Speedup} = \frac{T_s}{T_p} = \frac{48}{16} = 3{,}00 $$
+$$\text{Speedup} = \frac{T_s}{T_p} = \frac{48}{16} = 3{,}00$$
 
 # Výber z možností
 ## Skupina: Inštrukčné závislosti
@@ -1150,7 +1148,7 @@ Vyberte jednu:
 
 **Vysvetlenie**:
 - merged-pps.pdf strana 499: Prepojovacia sieť 256×256 používa 8-bitové adresy ($256 = 2^8$). Permutačná funkcia **dokonalé premiešanie (perfect shuffle)** je definovaná ako:
-$$ shuffle(p_{n-1}p_{n-2} \dots p_1p_0) = p_{n-2}p_{n-3} \dots p_0p_{n-1} $$
+$$shuffle(p_{n-1}p_{n-2} \dots p_1p_0) = p_{n-2}p_{n-3} \dots p_0p_{n-1}$$
 čo zodpovedá rotácii doľava o 1 bit.
 
 Vysielač: `0x21` = `0010 0001` (binárne, 8 bitov).
