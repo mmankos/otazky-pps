@@ -543,12 +543,14 @@ Určte koeficient vektorizácie pre nasledujúce hodnoty:
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
+
 Koeficient účinnosti vektorizácie pre nasledujúcu skladbu programu
-Nevektorizovateľná časť programu: 5 skalárnych operácií,
-Doba vykonania jednej skalárnej operácie: 8 strojových cyklov (SC)
-Vektorizovateľná časť programu: 1 operácia 10-násobného logického cyklu
-Doba vykonania tela cyklu: 25 SC
-Účinnosť vektorového spracovania: 4,17
+- Nevektorizovateľná časť programu: 5 skalárnych operácií,
+- Doba vykonania jednej skalárnej operácie: 8 strojových cyklov (SC)
+- Vektorizovateľná časť programu: 1 operácia 10-násobného logického cyklu
+- Doba vykonania tela cyklu: 25 SC
+- Účinnosť vektorového spracovania: 4,17
+
 sa rovná:
 
 **Otázka**:
