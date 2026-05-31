@@ -158,10 +158,10 @@ Aká je obsadenosť výpočtových zdrojov (angl. occupancy) v percentách? Znak
 - `max_blokov` = maximálny počet blokov na SM = 6
 
 **Skutočný počet vlákien na SM:**
-$$\text{skutočné\_vlákna} = \text{veľkosť\_bloku} \times \text{max\_blokov} = 256 \times 6 = 1536$$
+$$\text{skutočné vlákna} = \text{veľkosť bloku} \times \text{max blokov} = 256 \times 6 = 1536$$
 
 **Obsadenosť (occupancy):**
-$$\text{occupancy} = \frac{\text{skutočné\_vlákna}}{\text{max\_vlákien}} \times 100\ \% = \frac{1536}{2048} \times 100\ \% = 75\ \%$$
+$$\text{occupancy} = \frac{\text{skutočné vlákna}}{\text{max vlákien}} \times 100\ \% = \frac{1536}{2048} \times 100\ \% = 75\ \%$$
 
 Obmedzujúcim faktorom je počet blokov — pri 256 vláknach na blok by naplnenie kapacity 2048 vlákien vyžadovalo 8 blokov, ale SM zvládne len 6.
 
@@ -232,7 +232,7 @@ kde:
 
 **1. AMAT pri h = 99% (0,99):**
 $$\text{miss rate} = 1 - 0{,}99 = 0{,}01$$
-$$\text{AMAT}_{99\%} = 1 + 0{,}01 \times 100 = 1 + 1 = 2\ \text{cykly}$$
+$$\text{AMAT}_{99} = 1 + 0{,}01 \times 100 = 1 + 1 = 2\ \text{cykly}$$
 
 **2. Hľadáme h také, aby AMAT = 3 × AMAT pri 99%:**
 $$\text{AMAT}_h = 3 \times 2 = 6\ \text{cyklov}$$
