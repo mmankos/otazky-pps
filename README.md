@@ -352,15 +352,19 @@ Hodnotu efektívneho zrýchlenia zaokrúhlite na stotiny!
 **Postup výpočtu:**
 
 **Sekvenčný čas** — každá z 8 inštrukcií trvá 6 cyklov:
+
 $$T_s = n \times k = 8 \times 6 = 48\ \text{cyklov}$$
 
 **Prúdový čas (ideálny, bez hazardov)** — prvá inštrukcia trvá 6 cyklov, každá ďalšia o 1 cyklus neskôr:
+
 $$T_{\text{p(ideál)}} = k + (n - 1) = 6 + 7 = 13\ \text{cyklov}$$
 
 **Prúdový čas (reálny)** — s dvomi RAW hazardmi (2 + 1 stall):
+
 $$T_p = k + (n - 1) + \text{stalls} = 6 + 7 + 3 = 16\ \text{cyklov}$$
 
 **Efektívne zrýchlenie:**
+
 $$\text{Speedup} = \frac{T_s}{T_p} = \frac{48}{16} = 3{,}00$$
 
 # Výber z možností
@@ -1251,6 +1255,7 @@ Označte jednu odpoveď:
 
 **Kontext**:
 Je tento výrok pravdivý ?
+
 $$Speedup\ (p\ processors) = \frac{Performance\ (1\ processor)}{Performance\ (p\ processors)}$$
 
 **Otázka**:
