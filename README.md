@@ -920,9 +920,66 @@ Pre `schedule(static, 2)` s 3 vláknami a 12 iteráciami (0–11) sa iterácie r
 
 ---
 
+### ID_OTAZKY: 036
+**Typ**: Multiple-Choice (Select ONE or MANY)
+
+**Kontext**:
+Ktoré tvrdenie/tvrdenia o GPU je/sú pravdivé?
+
+**Otázka**:
+Označte jednu alebo viac odpovedí:
+
+**Odpoveď**:
+- [ ] GPU obsahuje kolekciu viacvláknových procesorov SISD.
+- [ ] GPU obsahuje kolekciu viacvláknových procesorov MISD.
+- [x] GPU obsahuje kolekciu viacvláknových procesorov SIMD.
+- [ ] GPU obsahuje kolekciu VLIW jednotiek.
+
+**Vysvetlenie**:
+- merged-pps.pdf strana 847: *"The GPU hardware contains a collection of multithreaded SIMD Processors (Streaming Multiprocessors; SM) that execute a grid of thread blocks."*
+
+---
+
+### ID_OTAZKY: 037
+**Kontext**:
+Je daný úryvok programového kódu
+
+**Otázka**:
+```
+sum = 0.0;
+for (i = 0; i <= n; i++)
+    sum += f(i);
+```
+Vašou úlohou je použitím OpenMP paralelizovať vykonávanie kódu.
+Doplňte chýbajúce časti kódu, pre prípad, že
+- chceme použiť redukciu nad lokálnou kópiou príslušnej premennej;
+- dve vlákna s pevným pridelením iterácií s počtom (resp. rozmerom) 1.
+```
+sum = 0.0;
+```
+#pragma [ ... ] [ ... ] num_[ ... ] ( [ ... ] ) reduction ( [ ... ] : sum ) [ ... ] ( [ ... ] , [ ... ] )
+```
+for (i = 0; i <= n; i++)
+    sum += f(i);
+```
+
+**Odpoveď**:
+```
+#pragma omp parallel for num_threads(2) reduction(+: sum) schedule(static, 1)
+```
+
+**Vysvetlenie**:
+- `omp` — direktíva OpenMP
+- `parallel for` — paralelizuje cyklus `for`
+- `num_threads(2)` — obmedzuje počet vlákien na 2
+- `reduction(+: sum)` — vytvorí lokálnu kópiu `sum` pre každé vlákno; výsledky sa po skončení cyklu sčítajú (redukcia operáciou `+`)
+- `schedule(static, 1)` — pevné pridelenie iterácií v cyklickom režime po 1 iterácii (chunk size = 1). Pri 2 vláknach: Thread 0 spracúva párne iterácie (0, 2, 4, ...), Thread 1 nepárne (1, 3, 5, ...)
+
+---
+
 ## Skupina: Programovacie modely (MP, SAS)
 
-### ID_OTAZKY: 036
+### ID_OTAZKY: 038
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -946,7 +1003,7 @@ MP (Message Passing) programovací model je založený na explicitnej komunikác
 
 ---
 
-### ID_OTAZKY: 037
+### ID_OTAZKY: 039
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -971,7 +1028,7 @@ SAS (Shared Address Space – zdieľaný adresný priestor) je programovací mod
 
 ## Skupina: Architektúry a modely vykonávania (ILP, TLP, VLIW, superskalárne)
 
-### ID_OTAZKY: 038
+### ID_OTAZKY: 040
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -988,7 +1045,7 @@ Vyberte jednu:
 **Vysvetlenie**:
 - merged-pps.pdf strana 559: *"Pri načítaní operandov vo fáze Výberu tak pamäť registrov ako aj P-zásobník obsahuje informáciu o platnosti obsahu príslušného zdrojového (resp. cieľového) registra."*
 
-### ID_OTAZKY: 039
+### ID_OTAZKY: 041
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1007,7 +1064,7 @@ Označte jednu odpoveď:
 - merged-pps.pdf strana 532: Skalárne procesory s cyklickým prekrývaním (prvé tri inštrukcie) $(I_{11}), (I_{21}), \dots , (I_{n1}), (I_{12}), \dots , (I_{n2}), \dots , (I_{13}), \dots , (I_{n3}), \dots$
 - merged-pps.pdf strana 602: Pre blokové prekrývanie by postupnosť bola $(I_{11}), (I_{12}), \dots , (I_{1n_1}), (I_{21}), \dots$
 
-### ID_OTAZKY: 040
+### ID_OTAZKY: 042
 **Typ**: Multiple-Choice (Select ONE or MANY)
 
 **Kontext**:
@@ -1033,7 +1090,7 @@ merged-pps.pdf strana 519: Časový kontra priestorový paralelizmus
 
 ---
 
-### ID_OTAZKY: 041
+### ID_OTAZKY: 043
 **Typ**: Multiple-Choice (Select ONE or MANY)
 
 **Kontext**:
@@ -1061,7 +1118,7 @@ Označte jednu alebo viac odpovedí:
 
 ---
 
-### ID_OTAZKY: 042
+### ID_OTAZKY: 044
 **Typ**: Multiple-Choice (Select ONE or MANY)
 
 **Kontext**:
@@ -1084,7 +1141,7 @@ Označte jednu alebo viac odpovedí:
 
 ---
 
-### ID_OTAZKY: 043
+### ID_OTAZKY: 045
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1105,7 +1162,7 @@ Vyberte jednu:
 
 ## Skupina: Prepojovacie siete a manipulácia s údajmi
 
-### ID_OTAZKY: 044
+### ID_OTAZKY: 046
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1119,7 +1176,7 @@ Vyberte jednu odpoveď
 - [X] Pravda
 - [ ] Nepravda
 
-### ID_OTAZKY: 045
+### ID_OTAZKY: 047
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1142,7 +1199,7 @@ Funkcia $f(p_{n-1} \dots p_1 p_0) = p_0 p_{n-1} \dots p_2 p_1$ je definícia **i
 - merged-pps.pdf strana 499: Inverzné premiešanie je definované ako
   $$shuffle^{-1}(p_{n-1}p_{n-2} \dots p_1p_0) = p_0p_{n-1} \dots p_2p_1$$
 
-### ID_OTAZKY: 046
+### ID_OTAZKY: 048
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1169,7 +1226,7 @@ Po aplikovaní shuffle: `0100 0010` = `0x42`.
 
 Prijímač má teda adresu **0x42**.
 
-### ID_OTAZKY: 047
+### ID_OTAZKY: 049
 **Typ**: Multiple-Choice (Select ONE or MANY)
 
 **Kontext**:
@@ -1189,9 +1246,29 @@ Označte jednu alebo viac odpovedí:
 
 ---
 
+### ID_OTAZKY: 050
+**Typ**: Multiple-Choice (Select ONE or MANY)
+
+**Kontext**:
+Akým spôsobom QPI zabezpečuje škálovateľnosť v multiprocesorových systémoch?
+
+**Otázka**:
+Označte jednu alebo viac odpovedí:
+
+**Odpoveď**:
+- [ ] Využitím cache-coherent mechanizmov
+- [ ] Pomocou paralelného prístupu do pamäte cez zdieľanú zbernicu
+- [x] Použitím point-to-point spojení medzi viacerými uzlami
+- [ ] Použitím centrálnej zbernice s vysokou kapacitou
+
+**Vysvetlenie**:
+- merged-pps.pdf strana 206: *"úzke hrdlo je zbernica; riešením je spojiť jednotlivé procesory priamo, tzv. point-to-point; Intel QuickPath Interconnect"*
+
+---
+
 ## Skupina: Výkonnosť a škálovanie
 
-### ID_OTAZKY: 048
+### ID_OTAZKY: 051
 **Typ**: Multiple-Choice (Select ONE or MANY)
 
 **Kontext**:
@@ -1214,7 +1291,7 @@ Označte jednu alebo viac odpovedí:
 
 ---
 
-### ID_OTAZKY: 049
+### ID_OTAZKY: 052
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1233,7 +1310,7 @@ Vyberte jednu:
 
 ---
 
-### ID_OTAZKY: 050
+### ID_OTAZKY: 053
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1252,7 +1329,7 @@ Označte jednu odpoveď:
 
 ---
 
-### ID_OTAZKY: 051
+### ID_OTAZKY: 054
 **Typ**: Single-Choice (Select ONE)
 
 **Kontext**:
@@ -1271,4 +1348,4 @@ Vyberte jednu:
 - merged-pps.pdf strana 7: $Speedup(p) = \frac{Performance(p)}{Performance(1)}$
 - Pre porovnanie, v termínoch času (Time) platí $Speedup(p) = \frac{Time(1)}{Time(p)}$, keďže $Performance = \frac{1}{Time}$
 
----
+
