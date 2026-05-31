@@ -231,16 +231,23 @@ kde:
 - `miss rate` = 1 - h
 
 **1. AMAT pri h = 99% (0,99):**
+
 $$\text{miss rate} = 1 - 0{,}99 = 0{,}01$$
+
 $$\text{AMAT}_{99} = 1 + 0{,}01 \times 100 = 1 + 1 = 2\ \text{cykly}$$
 
 **2. Hľadáme h také, aby AMAT = 3 × AMAT pri 99%:**
+
 $$\text{AMAT}_h = 3 \times 2 = 6\ \text{cyklov}$$
 
 **3. Dosadenie do vzorca:**
+
 $$1 + (1 - h) \times 100 = 6$$
+
 $$(1 - h) \times 100 = 5$$
+
 $$1 - h = 0{,}05$$
+
 $$h = 0{,}95 = 95\%$$
 
 ---
