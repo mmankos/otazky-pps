@@ -205,7 +205,7 @@ $$ \text{počet missov} = \frac{\text{počet prvkov}}{\text{prvkov na blok}} = \
 Hodnoty M a N nie sú zadané, ale nie sú potrebné — vo vzorci sa vykrátia:
 
 $$
-\text{miss\_rate} = \frac{\text{počet missov}}{\text{počet prístupov}} = \frac{\frac{M \times N}{4}}{M \times N} = \frac{1}{4} = 0{,}25 = 25\%
+\text{miss rate} = \frac{\text{počet missov}}{\text{počet prístupov}} = \frac{\frac{M \times N}{4}}{M \times N} = \frac{1}{4} = 0{,}25 = 25\%
 $$
 
 Miss rate závisí výhradne od pomeru veľkosti bloku cache a veľkosti prvku poľa, nie od rozmerov poľa.
