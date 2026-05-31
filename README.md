@@ -1267,6 +1267,6 @@ Vyberte jednu:
 
 **Vysvetlenie**:
 - merged-pps.pdf strana 7: $Speedup(p) = \frac{Performance(p)}{Performance(1)}$
-- Pre porovnanie, v termínoch času (Time) platí $Speedup(p) = \frac{Time(1)}{Time(p)}$, keďže $Performance = 1/Time$
+- Pre porovnanie, v termínoch času (Time) platí $Speedup(p) = \frac{Time(1)}{Time(p)}$, keďže $Performance = \frac{1}{Time}$
 
 ---
